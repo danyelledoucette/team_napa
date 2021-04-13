@@ -2,5 +2,5 @@
 
 ## Team:
 - Brandie -> Webpage
-- Elizabeth -> SQLite
+- Elizabeth -> ETL and SQL
 - Alex & Danyelle -> JavaScript
