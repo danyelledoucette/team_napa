@@ -21,11 +21,11 @@ var chartGroup = svg.append("g")
   .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
 // Import Data
-d3.csv("winemag-data-130k-v2.csv").then(function(wineData) {
+d3.csv("Argentina.csv").then(function(ArgentinaWineData) {
 
     // Step 1: Parse Data/Cast as numbers
     // ==============================
-    wineData.forEach(function(data) {
+    ArgentinaWineData.forEach(function(data) {
       data.price = +data.price;
       data.points = +data.points;
     });
@@ -33,11 +33,11 @@ d3.csv("winemag-data-130k-v2.csv").then(function(wineData) {
     // Step 2: Create scale functions
     // ==============================
     var xLinearScale = d3.scaleLinear()
-      .domain([0, d3.max(wineData, d => d.price)])
+      .domain([0, d3.max(ArgentinaWineData, d => d.price)])
       .range([0, width]);
 
     var yLinearScale = d3.scaleLinear()
-      .domain([0, d3.max(wineData, d => d.points)])
+      .domain([75, d3.max(ArgentinaWineData, d => d.points)])
       .range([height, 0]);
 
     // Step 3: Create axis functions
@@ -57,7 +57,7 @@ d3.csv("winemag-data-130k-v2.csv").then(function(wineData) {
     // Step 5: Create Circles
     // ==============================
     var circlesGroup = chartGroup.selectAll("circle")
-    .data(wineData)
+    .data(ArgentinaWineData)
     .enter()
     .append("circle")
     .attr("cx", d => xLinearScale(d.price))
@@ -72,7 +72,7 @@ d3.csv("winemag-data-130k-v2.csv").then(function(wineData) {
       .attr("class", "tooltip")
       .offset([80, -60])
       .html(function(d) {
-        return (`${d.country}<br>Winery: ${d.winery}<br>Points: ${d.points}`);
+        return (`${d.winery}<br>Winery: ${d.winery}<br>Points: ${d.points}`);
       });
 
     // Step 7: Create tooltip in the chart
@@ -105,3 +105,17 @@ d3.csv("winemag-data-130k-v2.csv").then(function(wineData) {
   }).catch(function(error) {
     console.log(error);
   });
+
+  var wineScoreMetadata = data.metadata.filter(item=> (item.id == selectedID));
+
+  var gaugeDisplay = d3.select("#gauge");
+  gaugeDisplay.html("");
+
+  // var wineScore = 
+
+  var gaugeData = [
+    {
+      domain: {x: [0,1], y:[0,1]},
+      value
+    }
+  ]
