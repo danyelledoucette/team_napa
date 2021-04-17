@@ -121,7 +121,7 @@
   //   }
   // ]
 
-var gData 
+var wineData
 
   // Clears dropdown
 var dropdownMenu = d3.select("#selDataset").html(""); 
@@ -134,32 +134,42 @@ function selectData(selectedCountry){
   console.log(selectedCountry);
 
   // Read the json file for the data
-  d3.json("winemag-data-130k-v2.json").then((data) => {
+  d3.csv("cleaned wine.csv").then((data) => {
   
-  gData=data
-  console.log(data);
+  wineData=data
+  // console.log(data);
   
-  
-  // Select the metadata array and for each item append the item ID and adds ID to dropdown
-  // data.metadata.forEach(winery =>
-  //      {
-  // //       // console.log(item.id);
-  //      d3.select("#selDataset").append('option').attr('value', winery.country).text(winery.country);
-  //      });
+  var uniqueCountries = [];
 
-  // console.log(data)
+  for(i=0; i<data.length; i++){
+    if(uniqueCountries.indexOf(data[i].country) === -1){
+      uniqueCountries.push(data[i].country);
+    }
+  }
+
+  // console.log(uniqueCountries);
+  
+  
+  // Select the uniqueCountries array and for each item append the item ID and adds ID to dropdown
+  uniqueCountries.forEach(country =>
+       {
+  //       // console.log(item.id);
+       d3.select("#selDataset").append('option').attr('value', country).text(country);
+       });
+
   // Selected value is passed
   d3.select("#selDataset").node().value = selectedCountry;
   
-  // Filter Metadata for selected country from dropdown
-  var countryMetadata = data.filter(winery=> (winery.country == selectedCountry));
+  // Filter data for selected country from dropdown
+  var countryData = data.filter(winery=> (winery.country == selectedCountry));
     
-//   // Check the metadata loaded for the selected ID
-  console.log(countryMetadata);
+//   // Check the data loaded for the selected country
+  // console.log(countryData);
   
-  var panelDisplay = d3.select("#sample-metadata");
+  // Update the panel display to have the selected country
+  var panelDisplay = d3.select("#sample-data");
   panelDisplay.html("");
-  Object.entries(countryMetadata[0]).forEach(winery=> 
+  Object.entries(countryData[0]).forEach(winery=> 
      {
         console.log(winery);
         panelDisplay.append("p").text(`${winery[0]}: ${winery[1]}`)
@@ -167,138 +177,158 @@ function selectData(selectedCountry){
 
 //   // BAR CHART
 
-//   // Filter sample array data for the selected ID
+// Filter sample array data for the selected country
 var countrySample = data.filter(winery => winery.country == selectedCountry);
   
-//   // // Check values
-console.log(countrySample)
-  
-//   // Slice top 10 sample values
-  var sampleValue = countrySample[0].country.slice(0,10);
-//   // sampleValue= sampleValue.reverse();
-  var winerySample = countrySample[0].winery.slice(0,10);
-//   // otuID = otuID.reverse();
-  var wineryPoints = countrySample[0].points
-//   // otuLabels = otuLabels.reverse();
+// Check values
+console.log(countrySample);
 
-//   // // Check values
-   console.log(sampleValue);
-   console.log(winerySample);
+  var wineryPoints = data.map(winery => winery.points)
+  var winePrice = data.map(winery => winery.price)
+
+  // Check values
+  //  console.log(sampleValue);
+   console.log(winePrice);
    console.log(wineryPoints);
   
   // Define the layout and trace object, edit color and orientation
-     const trace = {
+  
+  var trace1 = {
      y: wineryPoints,
-     x: sampleValue,
+     x: winePrice,
      type: 'bar',
-     orientation: "h",
-     text:  wineryPoints,
+     orientation: 'h',
      marker: {
-        color: 'rgb(154, 140, 152)',
-        line: {
-           width: 3
+       color: 'red',
+       line: {
+         width: 3
        }
-      }
-     },
-     layout = {
-     title: 'Top 10 Operational Taxonomic Units (OTU)/Individual',
-     xaxis: {title: 'Number of Samples Collected'},
-     yaxis: {title: 'OTU ID'}
+     }
+    },
+  layout = {
+     title: 'Distribution of Points by Country',
+     xaxis: {title: 'Wine Valuation'},
+     yaxis: {title: 'Points'}
      };
 
-     // Plot using Plotly
-     Plotly.newPlot('.bar', data, layout);    
-     
+     var data1 = [trace1]
+
+  // Plot using plotly  
+  Plotly.plot("bar", data1, layout, {responsive: true});    
+
 // // BUBBLE CHART
 
-// // Remove Sample value and otuID from individual
-// var sampleValue1 =idSample[0].sample_values;
-// var otuID1= idSample[0].otu_ids;
 
-// // Define the layout and trace object, edit color and orientation
-// const trace1 = {
-//   x: otuID1,
-//   y: sampleValue1,
-//   mode: 'markers',
-//   marker: {
-//     color: otuID1,
-    
-//     size: sampleValue1
-//   }
-// },
+console.log(data);
 
-// layout1 = {
-//   title: '<b>Bubble Chart For Each Sample</b>',
-//   xaxis: {title: 'OTU ID'},
-//   yaxis: {title: 'Number of Samples Collected'},
-//   showlegend: false,
-//   height: 800,
-//   width: 1800
-//   };
+var countryArray = data.map(winery => winery.country)
+console.log(countryArray);
+
+var countryCounts = {};
+for (var i=0; i<countryArray.length; i++) {
+  countryCounts[countryArray[i]] = 1 + (countryCounts[countryArray[i]] || 0);
+}
+console.log(countryCounts);
+
+var countryName = [];
+
+var result = [];
+for (var i in countryCounts) {
+result.push(countryCounts[i]);
+countryName.push(i);
+}
+console.log(result)
+console.log(countryName);
+// console.log(dataCounts);
+
+
+var trace2 = {
+  x: countryName,
+  y: result,
+  mode: 'markers',
+  marker: {
+    color: countryName,
+
+    size: result,
+    sizeref: 500
+  }
+};
+
+var data2 = [trace2];
+
+var layout2 = {
+  title: 'Number of Wineries by Country',
+  showlegend: false,
+  height: 600,
+  width: 600
+};
+
+// Plot using Plotly
+Plotly.newPlot('bubble', data2, layout2);
   
-// // Plot using Plotly
-// Plotly.newPlot('bubble', [trace1], layout1);
-
 // // BONUS: GAUGE CHART
 
 // // Gauge Chart to plot weekly washing frequency 
-// const gaugeDisplay = d3.select("#gauge");
-// gaugeDisplay.html(""); 
-// const wineRating = countryMetadata[0].points;
+var gaugeDisplay = d3.select("#gauge");
+gaugeDisplay.html(""); 
 
-// const gaugeData = [
-//   {
-//     domain: { x: [0, 1], y: [0, 1] },
-//     value: wineRating,
-//     title: { text: "<b>Wine Rating</b><br>" },
-//     type: "indicator",
-//     mode: "gauge+number",     
-//      gauge: {
-//      axis: { range: [0,9] },
-//      bar: { color: "#f2e9e4" },
-//      steps: [
-//         { range: [0, 1], color: "#e5d5d0" },
-//         { range: [1, 2], color: "#dbc7c2" },
-//         { range: [2, 3], color: "#d2b9b4" },
-//         { range: [3, 4], color: "#c9ada7" },
-//         { range: [4, 5], color: "#ac9899" },
-//         { range: [5, 6], color: "#8a7e88" },
-//         { range: [6, 7], color: "#7d7482" },
-//         { range: [7, 8], color: "#706a7b" },
-//         { range: [8, 9], color: "#4a4e69" }
+var gaugeData = [
+  {
+    domain: { x: [0, 1], y: [0, 1] },
+    value: wineryPoints,
+    title: { text: "<b>Wine Rating</b><br>" },
+    type: "indicator",
+    mode: "gauge+number",     
+     gauge: {
+     axis: { range: [0,9] },
+     bar: { color: "#f2e9e4" },
+     steps: [
+        { range: [0, 1], color: "#e5d5d0" },
+        { range: [1, 2], color: "#dbc7c2" },
+        { range: [2, 3], color: "#d2b9b4" },
+        { range: [3, 4], color: "#c9ada7" },
+        { range: [4, 5], color: "#ac9899" },
+        { range: [5, 6], color: "#8a7e88" },
+        { range: [6, 7], color: "#7d7482" },
+        { range: [7, 8], color: "#706a7b" },
+        { range: [8, 9], color: "#4a4e69" }
               
-//       ],
-//      threshold: {
-//         value: wineRating
-//       }
-//     }
-//   }
-// ]; 
-// const gaugeLayout = {  width: 600, 
-//                  height: 400, 
-//                  margin: { t: 0, b: 0 }, 
-//                   };
+      ],
+     threshold: {
+        value: wineryPoints
+      }
+    }
+  }
+]; 
+var gaugeLayout = {  width: 600, 
+                 height: 400, 
+                 margin: { t: 0, b: 0 }, 
+                  };
 
-// // Plot using Plotly
-// Plotly.newPlot('gauge', gaugeData, gaugeLayout); 
+// Plot using Plotly
+Plotly.newPlot('gauge', gaugeData, gaugeLayout); 
 
 
 // Event on change takes the value and calls the function during dropdown selection
- d3.select("#selDataset").on("change", function(data) {
-   // recover the option that has been chosen
-   var selectedOption = d3.select(this).property("value")
-   // run the updateChart function with this selected option
-   update(selectedOption)
+//  d3.select("#selDataset").on("change", function(data) {
+//    // recover the option that has been chosen
+//    var selectedOption = d3.select(this).property("value")
+//    // run the updateChart function with this selected option
+//    update(selectedOption)
 
- });
+//  });
 
-function optionChanged(country) {
- console.log(country);
- // resetData();
- selectData(country)
+
+// init();
+
+  })
 }
-init();
-})
-}
+
+function optionChanged(winery) {
+  console.log(winery);
+  // resetData();
+  selectData(winery)
+ }
 // Initial test starts at Italy
 selectData("Italy")
+
