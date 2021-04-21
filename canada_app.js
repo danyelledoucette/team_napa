@@ -31,7 +31,7 @@ var svg = d3.select("#circle")
 // .append("g")
 //   .attr("transform", "translate(" + (width / 2 + margin.left) + "," + (height / 2 + margin.top) + ")");
 
-var chartGroup1 = svg.append("g")
+var chartGroup = svg.append("g")
   .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
 
@@ -122,23 +122,23 @@ d3.csv("Canada.csv").then(function(CanadaWineData) {
   });
 
     // List of words
-    var wineTypes = [];
+    // var wineTypes = [];
 
-    for(i=0; i<data.length; i++){
-      if(wineTypes.indexOf(data[i].variety) === -1){
-        wineTypes.push(data[i].variety);
-      }
-    }
-    // console.log(wineTypes);
+    // for(i=0; i<data.length; i++){
+    //   if(wineTypes.indexOf(data[i].variety) === -1){
+    //     wineTypes.push(data[i].variety);
+    //   }
+    // }
+    // // console.log(wineTypes);
 
-    var uniqueCountries = [];
-    var uniqueWineries = [];
+    // var uniqueCountries = [];
+    // var uniqueWineries = [];
   
-    for(i=0; i<data.length; i++){
-      if(uniqueCountries.indexOf(data[i].country) === -1){
-        uniqueCountries.push(data[i].country);
-      }
-    }
+    // for(i=0; i<data.length; i++){
+    //   if(uniqueCountries.indexOf(data[i].country) === -1){
+    //     uniqueCountries.push(data[i].country);
+    //   }
+    // }
   
     // for(i=0; i<data.length; i++){
     //   if(uniqueWineries.indexOf(data[i].winery) === -1){
