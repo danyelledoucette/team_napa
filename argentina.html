@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Team Napa</title>
+  <!-- Bootstrap stylesheet -->
+  <title>Wineries Data</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="index.html">Team Napa</a>
+    <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="true" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button> -->
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <!-- <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+        </li> -->
+        <ul class="navbar-nav">
+					<li class="nav-item">
+					<a class="nav-link active" aria-current="page" href="index.html">Home</a>
+					</li>
+					<li class="nav-item">
+					<a class="nav-link" href="#">Brandie</a>
+					</li>
+					<li class="nav-item">
+					<a class="nav-link" href="australia.html">Danyelle</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#">Elizabeth</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#">Alex</a>
+					</li>
+				</ul>
+        <!-- <li class="nav-item">
+          <a class="nav-link" href="comparison.html" tabindex="-1" aria-disabled="true">Comparison</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="cities.html" tabindex="-1" aria-disabled="true">Data</a>
+        </li> -->
+      </ul>
+    </div>
+  </nav>
+  <br>
+
+  <div class="temperature">
+      <div class="row">
+          <div class="col-md-8">
+              <div class="col-md-12">
+                  <h3>Argentinian Wineries</h3>
+                  <hr>
+                  <div class="row">
+				            <div id="circle"></div>
+			            </div>
+                        <img src="images/points for countries.png" alt="Points by Country Violin Chart">
+
+                  <br>
+              </div>
+          </div>
+          <div class="col-md-4">
+              <div class="col-md-12">
+                  <h3>Visualizations</h3>
+                  <hr>
+                  <div class="row">
+                      <div class="col-3 col-md-6">
+                          <a href="australia.html"><img src="static/images/australia.jpg" width="100% alt="Australia"</a>
+                      </div>
+                      <div class="col-3 col-md-6">
+                        <a href="canada.html"><img src="static/images/canada.jpg" width="100% alt="Canada"</a>
+                    </div>
+                    <div class="col-3 col-md-6">
+                        <a href="italy.html"><img src="static/images/italy.jpg" width="100% alt="Italy"</a>
+                    </div>
+                    <div class="col-3 col-md-6">
+                        <a href="france.html"><img src="static/images/france.jpg" width="100% alt="France"</a>
+                    </div>
+                    <div class="col-3 col-md-6">
+                        <a href="us.html"><img src="static/images/us.jpg" width="100% alt="France"</a>
+                    </div>
+                    <div class="col-3 col-md-6">
+                        <a href="argentina.html"><img src="static/images/argentina.jpg" width="100% alt="Argentina"</a>
+                      </div>
+                      <div class="col-3 col-md-6">
+                        <a href="spain.html"><img src="static/images/spain.jpg" width="100% alt="Spain"</a>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+
+        <script src="https://d3js.org/d3.v5.min.js"></script>
+		    <script src="https://cdn.jsdelivr.net/gh/holtzy/D3-graph-gallery@master/LIB/d3-scale-radial.js"></script>
+		    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
+		    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+		    <script src="https://cdn.jsdelivr.net/gh/holtzy/D3-graph-gallery@master/LIB/d3.layout.cloud.js"></script>
+            <!-- <script type="text/javascript" src="australia_app.js"></script> -->
+            <!-- <script type="text/javascript" src="canada_app.js"></script> -->
+            <!-- <script type="text/javascript" src="france_app.js"></script> -->
+            <script type="text/javascript" src="argentina_app.js"></script>
+
+
+  </body>
+  </html>
