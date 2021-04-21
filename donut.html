@@ -1,0 +1,50 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+  <script type="text/javascript">
+  window.onload = function () {
+    var chart = new CanvasJS.Chart("chartContainer",
+    {
+      title:{
+        text: "Varieties of Wine Per Country",
+        fontFamily: "Impact",
+        fontWeight: "normal"
+      },
+
+      legend:{
+        verticalAlign: "bottom",
+        horizontalAlign: "center"
+      },
+      data: [
+      {
+        //startAngle: 45,
+       indexLabelFontSize: 20,
+       indexLabelFontFamily: "Garamond",
+       indexLabelFontColor: "darkgrey",
+       indexLabelLineColor: "darkgrey",
+       indexLabelPlacement: "outside",
+       type: "doughnut",
+       showInLegend: true,
+       dataPoints: [
+       {  y: 26.4, legendText:"US 26.4%", indexLabel: "US 26.4%" },
+       {  y: 16.7, legendText:"France 16.7%", indexLabel: "France 16.7%" },
+       {  y: 19.8, legendText:"Italy 19.8%", indexLabel: "Italy 19.8%" },
+       {  y: 16.0, legendText:"Spain 16.0%", indexLabel: "Spain 16.0%" },
+       {  y: 8.4,  legendText:"Argentina 8.4%", indexLabel: "Argentina 8.4%" },
+       {  y: 9.0, legendText:"Australia 9.0%", indexLabel: "Australia 9.0%" },
+       {  y: 3.7, legendText:"Canada 3.7%", indexLabel: "Canada 3.7%" }
+       ]
+     }
+     ]
+   });
+
+    chart.render();
+  }
+  </script>
+  <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script></head>
+  <body>
+    <div id="chartContainer" style="height: 300px; width: 100%;">
+    </div>
+  </body>
+ </html>

@@ -9,7 +9,7 @@
  var data = [trace1];
 
 var layout = {
-  title: "'Bar' Chart",
+  title: "Wineries per Country",
  };
 
 Plotly.newPlot("plot", data, layout);
