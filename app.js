@@ -43,6 +43,7 @@ function selectData(selectedCountry, runNum){
   console.log(uniqueCountries);
   // console.log(uniqueWineries);
   
+  
   // Select the uniqueCountries array and for each item append the item ID and adds ID to dropdown
   if (runNum == 0){
     uniqueCountries.forEach(country =>
@@ -92,6 +93,8 @@ function selectData(selectedCountry, runNum){
     //        console.log(winery);
     //        panelDisplay.append("p").text(`${winery[0]}: ${winery[1]}`)
     //     });
+
+    // Wineries Per Country
 
 //   // BAR CHART
 
@@ -178,6 +181,22 @@ var layout2 = {
 
 // Plot using Plotly
 Plotly.newPlot('bubble', data2, layout2);
+
+
+var barTrace = {
+  labels: ["US", "France", "Italy", "Spain",
+   "Argentina", "Australia", "Canada",],
+values: [50.0, 20.0, 17.9, 6.0, 3.0, 2.1, 1.1],
+ type: 'pie'
+};
+
+var data = [barTrace];
+
+var layoutTrace = {
+ title: "Wineries per Country",
+};
+
+Plotly.newPlot("circle", data, layoutTrace);
   
   })
 }
