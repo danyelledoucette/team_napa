@@ -170,7 +170,7 @@ var trace2 = {
 var data2 = [trace2];
 
 var layout2 = {
-  title: 'Number of Wineries by Country',
+  // title: 'Number of Wineries by Country',
   showlegend: false,
   height: 600,
   width: 600

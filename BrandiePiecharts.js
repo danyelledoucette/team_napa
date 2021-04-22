@@ -8,8 +8,8 @@
 
  var data = [trace1];
 
-var layout = {
-  title: "Wineries per Country",
- };
+// var layout = {
+//   // title: "Wineries per Country",
+//  };
 
-Plotly.newPlot("plot", data, layout);
+Plotly.newPlot("plot", data);
