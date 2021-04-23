@@ -1,208 +1,113 @@
-var wineData
+var idb = ["data/Argentina.json", "data/Australia.json", "data/Canada.json", "data/France.json", "data/Italy.json", "data/Spain.json", "data/US.json"];
+//var cp = [];
 
-  // Clears dropdown
-var dropdownMenu = d3.select("#selDataset").html(""); 
-var data = dropdownMenu.property("value");
+//for (var i=0; i<7; i++){
+d3.json(idb[6]).then((importedData) => {
+    var data = importedData;
+    var cp =[{
+        x: Object.values(data.country),
+        y: Object.values(data.price),
+        type: "box",
+        name: Object.values(data.country)[0],
+        boxpoints: "all"
+    }];
+    //console.log(cp)
+    cp.push();
+    console.log(cp)
 
-  // Function for change on dropdown menu
-function selectData(selectedCountry, runNum){
+d3.json(idb[4]).then((importedData) => {
+    var data = importedData;
+    var cp1 =[{
+        x: Object.values(data.country),
+        y: Object.values(data.price),
+        type: "box",
+        name: Object.values(data.country)[0],
+        boxpoints: "all"
+    }];
+    //console.log(cp)
+    cp.push(cp1);
+    console.log(cp)
 
-  // Check if value is selected in dropdown
-  console.log(selectedCountry);
+d3.json(idb[2]).then((importedData) => {
+    var data = importedData;
+    var cp2 =[{
+        x: Object.values(data.country),
+        y: Object.values(data.price),
+        type: "box",
+        name: Object.values(data.country)[0],
+        boxpoints: "all"
+    }];
+    //console.log(cp)
+    cp.push(cp2);
+    //console.log(cp)
 
-// Read the json file for the data
-  d3.csv("wine.csv").then((data) => {
-  
-  wineData=data
-  // console.log(data);
-  
-  wineData.forEach(function(data) {
-          data.price = +data.price;
-          data.points = +data.points;
-        });
+d3.json(idb[1]).then((importedData) => {
+    var data = importedData;
+    var cp3 =[{
+        x: Object.values(data.country),
+        y: Object.values(data.price),
+        type: "box",
+        name: Object.values(data.country)[0],
+        boxpoints: "all"
+    }];
+    //console.log(cp)
+    cp.push(cp3);
+    //console.log(cp)
 
-  
-  var uniqueCountries = [];
-  // var uniqueWineries = [];
+d3.json(idb[3]).then((importedData) => {
+    var data = importedData;
+    var cp4 =[{
+        x: Object.values(data.country),
+        y: Object.values(data.price),
+        type: "box",
+        name: Object.values(data.country)[0],
+        boxpoints: "all"
+    }];
+    //console.log(cp)
+    cp.push(cp4);
+   //console.log(cp)
 
-  for(i=0; i<data.length; i++){
-    if(uniqueCountries.indexOf(data[i].country) === -1){
-      uniqueCountries.push(data[i].country);
-    }
-  }
+d3.json(idb[5]).then((importedData) => {
+    var data = importedData;
+    var cp5 =[{
+        x: Object.values(data.country),
+        y: Object.values(data.price),
+        type: "box",
+        name: Object.values(data.country)[0],
+        boxpoints: "all"
+    }];
+    //console.log(cp)
+    cp.push(cp5);
+    //console.log(cp)
 
-  // for(i=0; i<data.length; i++){
-  //   if(uniqueWineries.indexOf(data[i].winery) === -1){
-  //     uniqueWineries.push(data[i].winery);
-  //   }
-  // }
-
-  console.log(uniqueCountries);
-  // console.log(uniqueWineries);
-  
-  
-  // Select the uniqueCountries array and for each item append the item ID and adds ID to dropdown
-  if (runNum == 0){
-    uniqueCountries.forEach(country =>
-      {
- //       // console.log(item.id);
-      d3.select("#selDataset").append('option').attr('value', country).text(country);
-      });
-
-  // Selected value is passed
-  d3.select("#selDataset").node().value = selectedCountry;
-  }
-  
- 
-  
-    // Select the uniqueCountries array and for each item append the item ID and adds ID to dropdown
-//     uniqueWineries.forEach(winery =>
-//       {
-//  //       // console.log(item.id);
-//       d3.select("#selDataset").append('option').attr('value', winery).text(winery);
-//       });
-
-
-//  // Selected value is passed
-//  d3.select("#selDataset").node().value = selectedCountry;
-//   // Filter data for selected country from dropdown
-  var countryData = data.filter(winery=> (winery.country == selectedCountry));
-    
-  // d3.select("#selDataset").node().value = selectedCountry;
-  // Filter data for selected country from dropdown
-  // var countryData = data.filter(winery=> (winery.winery == selectedCountry));
-//   // Check the data loaded for the selected country
-  // console.log(countryData);
-  
-  // Update the panel display to have the selected country
-  var panelDisplay = d3.select("#sample-data");
-  panelDisplay.html("");
-  Object.entries(countryData[0]).forEach(winery=> 
-     {
-        console.log(winery);
-        panelDisplay.append("p").text(`${winery[0]}: ${winery[1]}`)
-     });
-
-    //  var panelDisplay = d3.select("#sample-data");
-    //  panelDisplay.html("");
-    //  Object.entries(countryData[0]).forEach(winery=> 
-    //     {
-    //        console.log(winery);
-    //        panelDisplay.append("p").text(`${winery[0]}: ${winery[1]}`)
-    //     });
-
-    // Wineries Per Country
-
-//   // BAR CHART
-
-// Filter sample array data for the selected country
-var countrySample = data.filter(winery => winery.country == selectedCountry);
-  
-// Check values
-// console.log(countrySample);
-
-  var wineryPoints = data.map(winery => winery.points)
-  var winePrice = data.map(winery => winery.price)
-
-  // Check values
-  //  console.log(sampleValue);
-  //  console.log(winePrice);
-  //  console.log(wineryPoints);
-  
-  // Define the layout and trace object, edit color and orientation
-  
-  var trace1 = {
-     y: wineryPoints,
-     x: winePrice,
-     type: 'bar',
-     orientation: 'h',
-     marker: {
-       color: 'red',
-       
-     }
-    },
-  layout = {
-     title: 'Price vs. Points by Country',
-     xaxis: {title: 'Wine Valuation'},
-     yaxis: {title: 'Points'}
-     };
-
-     var data1 = [trace1]
-
-  // Plot using plotly  
-  Plotly.plot("bar", data1, layout, {responsive: true});    
-
-// // BUBBLE CHART
-
-var countryArray = data.map(winery => winery.country)
-// console.log(countryArray);
-
-var countryCounts = {};
-for (var i=0; i<countryArray.length; i++) {
-  countryCounts[countryArray[i]] = 1 + (countryCounts[countryArray[i]] || 0);
-}
-// console.log(countryCounts);
-
-var countryName = [];
-
-var result = [];
-for (var i in countryCounts) {
-result.push(countryCounts[i]);
-countryName.push(i);
-}
-// console.log(result)
-// console.log(countryName);
-// console.log(dataCounts);
-
-
-var trace2 = {
-  x: countryName,
-  y: result,
-  mode: 'markers',
-  marker: {
-    color: "red",
-
-    size: result,
-    sizeref: 500
-  }
-};
-
-var data2 = [trace2];
-
-var layout2 = {
-  // title: 'Number of Wineries by Country',
-  showlegend: false,
-  height: 600,
-  width: 600
-};
-
-// Plot using Plotly
-Plotly.newPlot('bubble', data2, layout2);
-
-
-var barTrace = {
-  labels: ["US", "France", "Italy", "Spain",
-   "Argentina", "Australia", "Canada",],
-values: [50.0, 20.0, 17.9, 6.0, 3.0, 2.1, 1.1],
- type: 'pie'
-};
-
-var data = [barTrace];
-
-var layoutTrace = {
- title: "Wineries per Country",
-};
-
-Plotly.newPlot("circle", data, layoutTrace);
-  
-  })
-}
-
-function optionChanged(winery) {
-  console.log(winery);
-  // resetData();
-  selectData(winery, 1)
- }
-// Initial test starts at Italy
-selectData("Italy", 0)
-
+d3.json(idb[0]).then((importedData) => {
+    var data = importedData;
+    var cp6 =[{
+        x: Object.values(data.country),
+        y: Object.values(data.price),
+        type: "box",
+        name: Object.values(data.country)[0],
+        boxpoints: "all"
+    }];
+    //console.log(cp)
+    cp.push(cp6);
+    console.log(cp)
+    //for (var i=1; i<8; i++){
+    //console.log(cp[1][0]["x"])
+    //console.log(cp[1][0]["y"])
+      var layout = {
+        title: "Price by Country",
+        xaxis: { title: "Country" },
+        yaxis: { title: "Price, $", range: [0, 200] }
+      };
+      Plotly.newPlot("IQRPrice1", [cp[0], cp[1][0], cp[2][0], cp[3][0]], layout);
+      Plotly.newPlot("IQRPrice2", [cp[4][0], cp[5][0], cp[6][0]], layout);
+      console.log(cp)
+     
+})
+})
+})
+})
+})
+})
+});
