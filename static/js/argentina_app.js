@@ -18,7 +18,7 @@ var width = svgWidth - margin.left - margin.right;
 var height = svgHeight - margin.top - margin.bottom;
 
 // Create an SVG wrapper, append an SVG group that will hold our chart, and shift the latter by left and top margins.
-var svg1 = d3.select("#circle")
+var svg = d3.select("#circle")
   .append("svg")
   .attr("width", svgWidth)
   .attr("height", svgHeight);
@@ -31,16 +31,16 @@ var svg1 = d3.select("#circle")
 // .append("g")
 //   .attr("transform", "translate(" + (width / 2 + margin.left) + "," + (height / 2 + margin.top) + ")");
 
-var chartGroup1 = svg1.append("g")
+var chartGroup = svg.append("g")
   .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
 
 // Import Data
-d3.csv("Australia.csv").then(function(AustraliaWineData) {
+d3.csv("../../Argentina.csv").then(function(ArgentinaWineData) {
 
     // Step 1: Parse Data/Cast as numbers
     // ==============================
-    AustraliaWineData.forEach(function(data) {
+    ArgentinaWineData.forEach(function(data) {
       data.price = +data.price;
       data.points = +data.points;
     });
@@ -48,11 +48,11 @@ d3.csv("Australia.csv").then(function(AustraliaWineData) {
     // Step 2: Create scale functions
     // ==============================
     var xLinearScale = d3.scaleLinear()
-      .domain([0, d3.max(AustraliaWineData, d => d.price)])
+      .domain([0, d3.max(ArgentinaWineData, d => d.price)])
       .range([0, width]);
 
     var yLinearScale = d3.scaleLinear()
-      .domain([75, d3.max(AustraliaWineData, d => d.points)])
+      .domain([75, d3.max(ArgentinaWineData, d => d.points)])
       .range([height, 0]);
 
     // Step 3: Create axis functions
@@ -62,17 +62,17 @@ d3.csv("Australia.csv").then(function(AustraliaWineData) {
 
     // Step 4: Append Axes to the chart
     // ==============================
-    chartGroup1.append("g")
+    chartGroup.append("g")
       .attr("transform", `translate(0, ${height})`)
       .call(bottomAxis);
 
-    chartGroup1.append("g")
+    chartGroup.append("g")
       .call(leftAxis);
 
     // Step 5: Create Circles
     // ==============================
-    var circlesGroup = chartGroup1.selectAll("circle")
-    .data(AustraliaWineData)
+    var circlesGroup = chartGroup.selectAll("circle")
+    .data(ArgentinaWineData)
     .enter()
     .append("circle")
     .attr("cx", d => xLinearScale(d.price))
@@ -92,7 +92,7 @@ d3.csv("Australia.csv").then(function(AustraliaWineData) {
 
     // Step 7: Create tooltip in the chart
     // ==============================
-    chartGroup1.call(toolTip);
+    chartGroup.call(toolTip);
 
     // Step 8: Create event listeners to display and hide the tooltip
     // ==============================
@@ -105,7 +105,7 @@ d3.csv("Australia.csv").then(function(AustraliaWineData) {
       });
 
     // Create axes labels
-    chartGroup1.append("text")
+    chartGroup.append("text")
       .attr("transform", "rotate(-90)")
       .attr("y", 0 - margin.left + 40)
       .attr("x", 0 - (height / 2))
@@ -113,7 +113,7 @@ d3.csv("Australia.csv").then(function(AustraliaWineData) {
       .attr("class", "axisText")
       .text("Points");
 
-    chartGroup1.append("text")
+    chartGroup.append("text")
       .attr("transform", `translate(${width / 2}, ${height + margin.top + 30})`)
       .attr("class", "axisText")
       .text("Price");
@@ -122,23 +122,23 @@ d3.csv("Australia.csv").then(function(AustraliaWineData) {
   });
 
     // List of words
-    var wineTypes = [];
+    // var wineTypes = [];
 
-    for(i=0; i<data.length; i++){
-      if(wineTypes.indexOf(data[i].variety) === -1){
-        wineTypes.push(data[i].variety);
-      }
-    }
-    // console.log(wineTypes);
+    // for(i=0; i<data.length; i++){
+    //   if(wineTypes.indexOf(data[i].variety) === -1){
+    //     wineTypes.push(data[i].variety);
+    //   }
+    // }
+    // // console.log(wineTypes);
 
-    var uniqueCountries = [];
-    var uniqueWineries = [];
+    // var uniqueCountries = [];
+    // var uniqueWineries = [];
   
-    for(i=0; i<data.length; i++){
-      if(uniqueCountries.indexOf(data[i].country) === -1){
-        uniqueCountries.push(data[i].country);
-      }
-    }
+    // for(i=0; i<data.length; i++){
+    //   if(uniqueCountries.indexOf(data[i].country) === -1){
+    //     uniqueCountries.push(data[i].country);
+    //   }
+    // }
   
     // for(i=0; i<data.length; i++){
     //   if(uniqueWineries.indexOf(data[i].winery) === -1){

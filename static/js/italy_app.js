@@ -36,7 +36,7 @@ var chartGroup = svg.append("g")
 
 
 // Import Data
-d3.csv("Italy.csv").then(function(ItalyWineData) {
+d3.csv("../../Italy.csv").then(function(ItalyWineData) {
 
     // Step 1: Parse Data/Cast as numbers
     // ==============================

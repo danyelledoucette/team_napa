@@ -36,11 +36,11 @@ var chartGroup = svg.append("g")
 
 
 // Import Data
-d3.csv("US.csv").then(function(USWineData) {
+d3.csv("../../France.csv").then(function(FranceWineData) {
 
     // Step 1: Parse Data/Cast as numbers
     // ==============================
-    USWineData.forEach(function(data) {
+    FranceWineData.forEach(function(data) {
       data.price = +data.price;
       data.points = +data.points;
     });
@@ -48,11 +48,11 @@ d3.csv("US.csv").then(function(USWineData) {
     // Step 2: Create scale functions
     // ==============================
     var xLinearScale = d3.scaleLinear()
-      .domain([0, d3.max(USWineData, d => d.price)])
+      .domain([0, d3.max(FranceWineData, d => d.price)])
       .range([0, width]);
 
     var yLinearScale = d3.scaleLinear()
-      .domain([75, d3.max(USWineData, d => d.points)])
+      .domain([75, d3.max(FranceWineData, d => d.points)])
       .range([height, 0]);
 
     // Step 3: Create axis functions
@@ -72,7 +72,7 @@ d3.csv("US.csv").then(function(USWineData) {
     // Step 5: Create Circles
     // ==============================
     var circlesGroup = chartGroup.selectAll("circle")
-    .data(USWineData)
+    .data(FranceWineData)
     .enter()
     .append("circle")
     .attr("cx", d => xLinearScale(d.price))
